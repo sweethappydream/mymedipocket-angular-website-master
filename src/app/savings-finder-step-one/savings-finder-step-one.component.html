@@ -1,0 +1,48 @@
+<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCGBfk-20rbv_XrjQ3ioMIgBt56DAAQ62g&libraries=places,visualization" async></script>
+
+<div class="saving-finder page-padding">
+  <!-- Header -->
+  <div class="saving-finder__header">
+    <h2 class="saving-finder__header-title">Savings Finder</h2>
+  </div>
+  <!-- Body -->
+  <div class="saving-finder__body step-one">
+    <div class="saving-finder__body-inner">
+      <div class="saving-finder__body-video">
+        <iframe frameborder="0" allowfullscreen="1"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player"
+          width="640" height="360"
+          src="https://www.youtube.com/embed/gNMueLhY-ZU?autoplay=0&amp;fs=1&amp;rel=0&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fapp.therxcard.net&amp;widgetid=3"></iframe>
+      </div>
+      <h2>Find Prescription Savings Near:</h2>
+      <div class="error-msg" *ngIf="!isValidAddress">
+        Address must located in the United States, or a United States territory.
+      </div>
+      <div class="input-button-group">
+        <input type="text" placeholder="Enter Zip Code or Full Address" class="input-button-group__input"
+          (change)="getAddress()" [(ngModel)]="zipcode" />
+        <button type="button" class="input-button-group__button" (click)="getAddress()">GO</button>
+      </div>
+      <h3>or</h3>
+      <button class="saving-finder__body-location-btn icon-target" type="button" (click)="getLatLong()">
+        Use your current location
+      </button>
+      <div id="search-footer" class="checks clearfix">
+        <div class="choice">
+          <input type="checkbox" name="remember_location" id="remember_location" value="on" /><label
+            for="remember_location">Remember My Location</label>
+        </div>
+        <button routerLink="/step2">
+          Skip This Step <i class="fa fa-angle-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="saving-finder__footer">
+    <p>&copy; 2018 All Rights Reserved</p>
+    <p>
+      <strong>Help: <a href="tel:18333000103">1-833-300-0103</a></strong>
+    </p>
+  </div>
+</div>

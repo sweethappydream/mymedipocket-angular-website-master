@@ -1,0 +1,208 @@
+:host {
+  text-align: center;
+}
+
+.saving-finder {
+    &__body {
+      &-inner {
+        max-width: 768px;
+  
+        margin: {
+          left: auto;
+          right: auto;
+        }
+      }
+  
+      &-video {
+        iframe {
+          width: 100%;
+          margin-bottom: 10px;
+  
+          @media (max-width: 575px) {
+            height: 195px;
+            margin-bottom: 0px;
+          }
+        }
+      }
+  
+      h2,
+      h3 {
+        color: #000;
+        margin: 0 0 15px;
+        font-weight: 600;
+      }
+  
+      h2 {
+        font-size: 2.25rem;
+        text-align: left;
+  
+        @media (max-width: 767px) {
+          font-size: 1.75rem;
+        }
+  
+        @media (max-width: 575px) {
+          font-size: 1.1rem;
+          margin-bottom: 0px; //change
+        }
+      }
+  
+      h3 {
+        text-align: center;
+  
+        @media (max-width: 575px) {
+          font-size: 1rem; //change
+          margin-top: 5px;
+        }
+      }
+  
+      &-location-btn {
+        display: inline-block;
+        background: #d00c30;
+        color: #fff;
+        border: 3px solid #d00c30;
+        outline: none;
+        width: 100%;
+        line-height: 1;
+        padding: 0.90909em;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.33773em;
+        text-align: left;
+        position: relative;
+        transition: all 0.3s ease-in-out;
+  
+        &:hover,
+        &:focus {
+          background: #88081f;
+          border-color: #88081f;
+        }
+  
+        &::before {
+          position: absolute;
+          top: 50%;
+          right: 15px;
+          font-size: 1.5em;
+          -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+  
+        @media (max-width: 767px) {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  
+    .input-button-group {
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+  
+      &__input,
+      &__button {
+        height: 70px;
+        line-height: 70px;
+        border: 1px solid #000;
+        margin-bottom: 15px;
+        // font-weight: 600;
+  
+        @media (max-width: 767px) {
+          height: 50px;
+          line-height: 50px;
+        }
+  
+        @media (max-width: 575px) {
+          //change
+          margin-bottom: 5px;
+        }
+      }
+  
+      &__input {
+        border-radius: 6px 0 0 6px;
+      }
+  
+      &__button {
+        border-radius: 0 6px 6px 0;
+      }
+  
+      &__input {
+        padding-left: 15px;
+        width: calc(100% - 70px);
+        color: #000;
+        font-size: 1.5rem;
+  
+        &[type="number"] {
+          appearance: none;
+          -moz-appearance: textfield;
+  
+          &::-webkit-inner-spin-button,
+          &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+  
+        &::-webkit-input-placeholder {
+          color: #ddd;
+          font-style: italic;
+          font-size: 2rem;
+        }
+  
+        &::-moz-placeholder {
+          color: #ddd;
+          font-style: italic;
+          font-size: 2rem;
+        }
+  
+        &:-ms-input-placeholder {
+          color: #ddd;
+          font-style: italic;
+          font-size: 2rem;
+        }
+  
+        &:-moz-placeholder {
+          color: #ddd;
+          font-style: italic;
+          font-size: 2rem;
+        }
+  
+        @media (max-width: 767px) {
+          font-size: 1rem;
+          width: calc(100% - 50px);
+  
+          &::-webkit-input-placeholder {
+            font-size: 0.85rem;
+          }
+  
+          &::-moz-placeholder {
+            font-size: 0.85rem;
+          }
+  
+          &:-ms-input-placeholder {
+            font-size: 0.85rem;
+          }
+  
+          &:-moz-placeholder {
+            font-size: 0.85rem;
+          }
+        }
+      }
+  
+      &__button {
+        background: #000;
+        color: #fff;
+        width: 70px;
+        text-align: center;
+        font-size: 2rem;
+  
+        @media (max-width: 767px) {
+          font-size: 1rem;
+          width: 50px;
+        }
+      }
+    }
+  }

@@ -1,0 +1,18 @@
+<div *ngIf = '!loading; else spinner'>
+    <app-header></app-header>
+
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+
+    <app-footer></app-footer>
+</div>
+
+<ng-template #spinner>
+    <div style = 'display: grid; height: 100vh; place-content: center;'>
+        <mat-spinner></mat-spinner>
+        <h2 style = 'padding: 10px;'>Loading...</h2>
+    </div>
+</ng-template>
+
+

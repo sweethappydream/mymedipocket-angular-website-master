@@ -1,0 +1,350 @@
+<div class="saving-finder">
+  <!-- Header -->
+  <div class="saving-finder__header saving-finder__header-style2">
+    <img src="assets/img/logo-icon.png" alt="" class="saving-finder__header-logo" routerLink="" />
+    <h3 class="saving-finder__header-title saving-finder__header-style2-title">
+      <span>Current Location: </span>
+      <strong>{{address}}</strong>
+      <a routerLink="/step1" class="saving-finder__header-style2-edit-btn">edit</a>
+    </h3>
+  </div>
+  <!-- Body -->
+  <div class="saving-finder__body step-two">
+    <div class="saving-finder__body-nav">
+      <a routerLink="/step1" class="saving-finder__body-nav-item saving-finder__body-nav-item-complete">
+        <span>1</span>
+        <span>Location</span>
+      </a>
+      <a routerLink="/step2" class="saving-finder__body-nav-item saving-finder__body-nav-item-complete">
+        <span>2</span>
+        <span>Benefits</span>
+      </a>
+      <a routerLink="/step3" class="saving-finder__body-nav-item saving-finder__body-nav-item-complete">
+        <span>3</span>
+        <span>Medication</span>
+      </a>
+      <a routerLink="/step4" class="saving-finder__body-nav-item saving-finder__body-nav-item-current">
+        <span>4</span>
+        <span>Results</span>
+      </a>
+    </div>
+    <div class="saving-finder__body-content">
+      <div class="row saving-finder__body-content-row">
+        <div class="col-md-5 saving-finder__body-content-left">
+          <!-- Title -->
+          <h3 class="title-icon">
+            {{totalMedicine}} Current Pharmacy Prices
+            <i class="fa fa-question-circle" (click)="openModalhelp(medicationHelp)"></i>
+          </h3>
+
+          <!-- Navigation Buttons -->
+          <div class="navigation-btns-grp">
+            <button class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--rounded"
+              (click)="activeButtonToggle()"
+              [ngClass]="{'navigation-btns-grp__btn--solid' : activeButton, 'navigation-btns-grp__btn--outline' : !activeButton }">
+              SORT BY PRICE
+            </button>
+            <button class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--rounded"
+              (click)="activeButtonToggle()"
+              [ngClass]="{'navigation-btns-grp__btn--solid' : !activeButton, 'navigation-btns-grp__btn--outline' : activeButton }">
+              SORT BY DISTANCE
+            </button>
+          </div>
+
+          <!--
+          <div class="navigation-btns-grp">
+            <a
+              class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--solid navigation-btns-grp__btn--rounded">
+              SORT BY PRICE
+            </a>
+            <a
+              class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--outline navigation-btns-grp__btn--rounded">
+              SORT BY DISTANCE
+            </a>
+          </div>
+          -->
+
+
+          <!-- discription -->
+          <div *ngFor="let item of qtyArray ;let i=index">
+            <div class="description_box cursor_pointer">
+              <ul (click)="getmedicalDetailsbyDistance(i)">
+                <li *ngIf="item.name==='Healthy Way Pharmacy'">
+                  <img src="../../../../assets/img/pharmacy.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='Pharmacy For Less, Inc.'">
+                  <img src="../../../../assets/img/pharmacy.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='CVS'">
+                  <img src="../../../../assets/img/cvs-pharma.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='CVS Inside Target'">
+                  <img src="../../../../assets/img/CVS-Inside-Target.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='Walmart'">
+                  <img src="../../../../assets/img/Walmart.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='Rite Aid'">
+                  <img src="../../../../assets/img/Rite-Aid.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='Walgreens'">
+                  <img src="../../../../assets/img/Walgreens.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='Ralphs Pharmacy'">
+                  <img src="../../../../assets/img/pharmacy.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='Vons Pharmacy'">
+                  <img src="../../../../assets/img/pharmacy.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name==='Local'">
+                  <img src="../../../../assets/img/pharmacy.svg" class="medical-icon" />
+                </li>
+                <li *ngIf="item.name!=='Local' && item.name !=='Vons Pharmacy' && item.name !=='Ralphs Pharmacy' && item.name !=='Walgreens' && item.name !=='Rite Aid' && item.name !=='Walmart' && item.name !=='CVS Inside Target' && item.name !=='CVS' && item.name !=='Pharmacy For Less, Inc.' && item.name !=='Healthy Way Pharmacy'">
+                  <img src="../../../../assets/img/pharmacy.svg" class="medical-icon" />
+                </li>
+                <li><span class="pharm-title">{{item.name}}<span
+                      class="pharm-count">({{item.Summary.PharmacyCount}})</span></span></li>
+                <li><span class="pharm-locations icon-location">{{item.distance | number : '1.2-2' }}mi</span></li>
+                <li><span class="pharm-price">${{item.Summary.MinPrice | number : '1.2-2' | noComma}}</span></li>
+              </ul>
+            </div>
+            <i class="fa fa-chevron-down" (click)="getmedicalDetailsbyDistance(i)" aria-hidden="true"></i>
+
+            <!-- SHow-hide_description -->
+            <div *ngIf="item.showTime">
+              <div class="description_box_onclick mt-2" *ngFor="let phrmaitem of showsubResult.pharmData">
+                <ul (click)="openDescriptionModal(description,phrmaitem)">
+                  <li class="align-icon-center"><i _ngcontent-kgn-c3="" class="icon-location ml-3"></i></li>
+                  <!-- <li><span class="pharm-title">CVS<span class="pharm-count">(10)</span></span></li>  -->
+                  <li class="address"><span>{{phrmaitem.street1}}<br><button class="more_info_button"
+                        (click)="openDescriptionModal(description,phrmaitem)">More Info</button></span></li>
+                  <li><span class="pharm-locations__move">{{phrmaitem.distance | number : '1.2-2'}}mi</span></li>
+                  <!-- <li *ngIf="showuncStatus"><span class="pharm-price">${{phrmaitem.pricing[0].unc}}</span></li>
+                  <li *ngIf="showpriceStatus"><span class="pharm-price">${{phrmaitem.pricing[0].price}}</span></li>
+                  <li *ngIf="normalPrice"><span class="pharm-price">${{phrmaitem.pricing[0].price}}</span></li>
+                -->
+                  <li><span class="pharm-price">${{phrmaitem.totalprice | number : '1.2-2' | noComma}}</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="navigation-btns-grp">
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--solid"
+              routerLink="/step3">
+              <i class="fa fa-chevron-left"></i> Medications
+            </a>
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--solid navigation-btns-grp__btn--blink text-white"
+              (click)="gosavingCard()">
+              Get Card <i class="fa fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-7 map-section">
+          <div id="map" #map></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="saving-finder__footer">
+    <p>&copy; 2018 All Rights Reserved</p>
+    <p>
+      <strong>Help: <a href="tel:18333000103">1-833-300-0103</a></strong>
+    </p>
+  </div>
+</div>
+
+<!-- Modals HTML -->
+<!-- Medical Help Modal -->
+<ng-template #medicationHelp let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Pharmacy Prices Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <i class="fa fa-times text-black" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        The pharmacy list will show pharmacy groups and the card price total for all medications in your list. You can
+        expand each pharmacy group by selecting the pharmacy name. Expanding a pharmacy group will show each individual
+        pharmacy location. For a detailed price breakdown and additional pharmacy information select MORE INFO.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!--  -->
+
+<ng-template #description let-modal class="cst-model_second">
+  <div class="cst-modal_second">
+    <div class="modal-header cst-modal__header_second position-relative">
+      <div class="cvs_heading">
+        <h3>
+          {{medicalmodalData.name}}
+        </h3>
+        <h4>{{medicalmodalData.street1}}</h4>
+      </div>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <i class="fa fa-times text-white" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+            aria-controls="pills-home" aria-selected="true">SAVINGS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            (click)="loadmap()" aria-controls="pills-profile" aria-selected="false">LOCATION</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+            aria-controls="pills-contact" aria-selected="false">HOURS</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          
+          <!-- <span *ngIf="showuncStatus" class="right_number"> ${{medicalmodalData.pricing[0].unc}} </span>
+          <span *ngIf="showpriceStatus" class="right_number"> ${{medicalmodalData.pricing[0].price}} </span>
+          <span *ngIf="normalPrice" class="right_number"> ${{medicalmodalData.pricing[0].price}} </span> -->
+          <span class="d-block">Total for all medications:
+            <span class="right_number"> ${{medicalmodalData.totalprice | number : '1.2-2' | noComma}} </span>
+          </span>
+          
+
+          <span class="d-block" *ngIf="estimatedSavingsStatus && brandStatus" >Estimated Savings : 
+            <span class="right_number estimatesaving-color">
+              ${{estimatedSavings | number : '1.2-2' | noComma}}
+            </span>
+          </span>
+          <span class="d-block" *ngIf="estimatedSavingsgenericStatus && genericStatus ">Estimated Savings : <span
+              class="right_number estimatesaving-color">
+              ${{estimatedSavingsgeneric | number : '1.2-2' | noComma}}
+            </span></span>
+          <span class="d-block" *ngIf="totalestimateStatus && alltpeStatus">Estimated Savings : <span
+              class="right_number estimatesaving-color">
+              ${{totalAmount | number : '1.2-2' | noComma}}
+            </span></span>
+
+          <div class="description_background"
+            *ngFor="let medicalData of medicationListDetail;let pricedata of showsubResult.pharmData">
+            <h3 class="text-capitalize">{{medicalData.BN}} 
+                <span>
+                    <small class="font-weight-bold">{{medicalData.Strength}}  {{medicalData.DosageForm}}</small>
+                  </span>
+            </h3>
+            <p>(<label *ngIf="medicalData.DrugType == 'B'">Brand for </label><label
+                *ngIf="medicalData.DrugType == 'G'">Generic for </label> {{medicalData.AN | titlecase}})</p>
+            <h6>{{medicalData.LN | titlecase}}</h6>
+            <!-- <button type="button">BRAND -->
+            <button type="button" *ngIf="medicalData.DrugType == 'B'">Brand</button>
+            <button class="text-uppercase" *ngIf="medicalData.DrugType == 'G'">Generic</button>
+
+            <!-- </button> -->
+            <span>Quantity : {{medicalData.QtyPrediction}}</span>
+            <h2>
+              <span class="mr-2">Card Price
+                <sup>1</sup>: 
+                <span class="font-weight-light"> ${{cardPrice | number : '1.2-2' | noComma}} </span>
+              </span>
+              <span *ngIf="medicalData.DrugType == 'B' && copayStatus">Copay
+                <sup>2</sup>:
+                <span class="font-weight-light">${{copayAmount}}</span>
+              </span>
+              <!-- <span *ngIf="medicalData.DrugType == 'B' && copayStatus">Copay
+                <sup>2</sup>:
+                <span class="font-weight-light">${{copayAmount}}</span>
+              </span> -->
+              <span *ngIf="medicalData.DrugType == 'G' && genericcopayStatus">Copay
+                <sup>2</sup>:
+                <span class=" font-weight-light">${{genericcopayAmount}}</span>
+              </span>
+              <span *ngIf="medicalData.DrugType == 'B' && copayStatus" class="ml-2">Savings
+                <sup>3</sup>: 
+                <span class="font-weight-light estimatesaving-color"> ${{estimatedSavings | number : '1.2-2' | noComma}}</span>
+              </span>
+              <span *ngIf="medicalData.DrugType == 'G' && genericcopayStatus" class="ml-2">Savings
+                <sup>3</sup>: 
+                <span class="font-weight-light estimatesaving-color">${{estimatedSavingsgeneric | number : '1.2-2' | noComma}}</span>
+              </span>
+            </h2>
+          </div>
+
+          <div class="current_price_text">
+            <ul>
+              <li>1 - This is the current price at the pharmacy using our card</li>
+              <li>2 - This shows your copay or the average retail price</li>
+              <li>3 - This is your estimated savings using our card</li>
+            </ul>
+            <button (click)="gosavingCard()" class="get_start_button"><a class="navigation-btns-grp__btn--blink">Get
+                Card <i class="fa fa-chevron-right"></i>
+              </a></button>
+
+            <button class="previous_button"> <i class="fa fa-chevron-left"></i> <a
+                class="navigation-btns-grp__btn--blink"> Previous
+              </a> </button>
+
+            <button class="previous_button"><a class="navigation-btns-grp__btn--blink">Next <i
+                  class="fa fa-chevron-right"></i>
+              </a></button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <!-- <div class="map"> -->
+          <div class="map" id="modelmap" #map></div>
+          <!-- </div> -->
+          <div class="map_description">
+            <h3>{{medicalmodalData.name}}</h3>
+            <p>{{medicalmodalData.street1}}</p>
+            <h1>{{medicalmodalData.city}}, {{medicalmodalData.state}} {{medicalmodalData.zip}}</h1>
+            <button><a routerLink="">{{medicalmodalData.phoneNumber}}</a></button> <br>
+            <button class="get_direction_button"><a routerLink="">GET DIRECTIONS</a></button>
+          </div>
+
+          <div class="current_price_text">
+            <button (click)="gosavingCard()" class="get_start_button"><a class="navigation-btns-grp__btn--blink">Get
+                Card <i class="fa fa-chevron-right"></i>
+              </a></button>
+
+            <button class="previous_button"> <i class="fa fa-chevron-left"></i> <a
+                class="navigation-btns-grp__btn--blink"> Previous
+              </a> </button>
+
+            <button class="previous_button"><a class="navigation-btns-grp__btn--blink">Next <i
+                  class="fa fa-chevron-right"></i>
+              </a></button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+          <ul class="location-hours" *ngFor="let item of calData">
+            <li>
+              <span>
+                <h6>{{item[0].substring(0, 3)}}</h6>
+              </span>
+              <span>{{item[1]}}</span>
+            </li>
+          </ul>
+          <div class="current_price_text">
+            <button (click)="gosavingCard()" class="get_start_button"><a class="navigation-btns-grp__btn--blink">Get
+                Card <i class="fa fa-chevron-right"></i>
+              </a></button>
+
+            <button class="previous_button"> <i class="fa fa-chevron-left"></i> <a
+                class="navigation-btns-grp__btn--blink"> Previous
+              </a> </button>
+
+            <button class="previous_button"><a class="navigation-btns-grp__btn--blink">Next <i
+                  class="fa fa-chevron-right"></i>
+              </a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

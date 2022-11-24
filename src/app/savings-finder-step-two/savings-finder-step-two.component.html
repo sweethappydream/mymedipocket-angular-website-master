@@ -1,0 +1,306 @@
+<div class="saving-finder">
+  <!-- Header -->
+  <div class="saving-finder__header saving-finder__header-style2">
+    <img src="assets/img/logo-icon.png" alt="" class="saving-finder__header-logo" routerLink="/home" />
+    <h3 class="saving-finder__header-title saving-finder__header-style2-title">
+      <span>Current Location: </span>
+      <strong>{{address}} </strong>
+      <a routerLink="/step1" class="saving-finder__header-style2-edit-btn">edit</a>
+    </h3>
+  </div>
+  <!-- Body -->
+  <div class="saving-finder__body step-two">
+    <!-- Steps nav -->
+    <div class="saving-finder__body-nav">
+      <a routerLink="/step1" class="saving-finder__body-nav-item saving-finder__body-nav-item-complete">
+        <span>1</span>
+        <span>Location</span>
+      </a>
+      <a routerLink="/step2" class="saving-finder__body-nav-item saving-finder__body-nav-item-current">
+        <span>2</span>
+        <span>Benefits</span>
+      </a>
+      <a routerLink="/step3" class="saving-finder__body-nav-item">
+        <span>3</span>
+        <span>Medication</span>
+      </a>
+      <a class="saving-finder__body-nav-item" rel="disabled">
+        <span>4</span>
+        <span>Results</span>
+      </a>
+    </div>
+    <!-- Content -->
+    <div class="saving-finder__body-content">
+      <div class="row saving-finder__body-content-row">
+        <div class="col-md-5 saving-finder__body-content-left">
+          <!-- Title -->
+          <h3 class="title-icon">
+            Copay Details
+            <i class="fa fa-question-circle" (click)="open(copayDetails)"></i>
+          </h3>
+          <!-- Confirmation Box -->
+          <div class="confirmation-box">
+            <h5 class="title-icon">
+              Are You Insured?
+              <i class="fa fa-question-circle" (click)="open(insuredHelp)"></i>
+            </h5>
+            <div class="cst-radio-btns-grp cst-radio-btns-grp--right">
+              <input type="radio" name="insured-options" id="insured-yes" />
+              <label for="insured-yes" (click)="areYouInsured(true)">Yes</label>
+              <input type="radio" name="insured-options" id="insured-no" />
+              <label for="insured-no" (click)="areYouInsured(false)">No</label>
+            </div>
+          </div>
+          <!-- Start If -->
+          <div *ngIf="areYouInsuredStatus">
+            <!-- Title -->
+            <h5 class="title-icon">
+              Select Your Generic Copay Amount?
+              <i class="fa fa-question-circle" (click)="open(genericCopayHelp)"></i>
+            </h5>
+            <!-- Radio Amount Group  -->
+            <div class="cst-radio-btns-grp cst-radio-btns-grp--amount">
+              <input type="radio" name="generic-copay-amount" id="five" />
+              <label for="five" (click)="genericCopay(false,5)">$5</label>
+              <input type="radio" name="generic-copay-amount" id="ten" />
+              <label for="ten" (click)="genericCopay(false,10)">$10</label>
+              <input type="radio" name="generic-copay-amount" id="fifteen" />
+              <label for="fifteen" (click)="genericCopay(false,15)">$15</label>
+              <input type="radio" name="generic-copay-amount" id="twenty" />
+              <label for="twenty" (click)="genericCopay(false,20)">$20</label>
+              <input type="radio" name="generic-copay-amount" id="twenty-five" />
+              <label for="twenty-five" (click)="genericCopay(false,25)">$25</label>
+            </div>
+            <!-- Radio other options -->
+            <div class="cst-radio-btns-grp">
+              <input type="radio" name="generic-copay-amount" id="other" />
+              <label for="other" (click)="genericCopay(true,'0')">OTHER</label>
+              <input type="radio" name="generic-copay-amount" id="varies" />
+              <label for="varies" (click)="genericCopay(false,'varies')">VARIES</label>
+              <input type="radio" name="generic-copay-amount" id="not-sure" />
+              <label for="not-sure" (click)="genericCopay(false,'not sure')">NOT SURE</label>
+            </div>
+            <!-- Quantity -->
+            <div *ngIf="genericCopayStatus">
+              <div class="btn-input-btn">
+                <i class="fa fa-minus" (click)="genericCopayQtyDec()"></i>
+                <span>$</span>
+                <input type="number" [(ngModel)]="genericCopayAmount" />
+                <i class="fa fa-plus" (click)="genericCopayQtyInc()"></i>
+              </div>
+            </div>
+            <!-- Confirmation Box -->
+            <div class="confirmation-box">
+              <h5 class="title-icon">
+                Do You Know Your Brand Copay?
+                <i class="fa fa-question-circle" (click)="open(brandCopayHelp)"></i>
+              </h5>
+              <div class="cst-radio-btns-grp cst-checkbox-btns-grp--right">
+                <input type="radio" name="copay-options" id="copay-yes" />
+                <label for="copay-yes" (click)="brandCopay(true)">Yes</label>
+                <input type="radio" name="copay-options" id="copay-no" />
+                <label for="copay-no" (click)="brandCopay(false)">No</label>
+              </div>
+            </div>
+            <div *ngIf="brandCopayStatus">
+              <!-- title -->
+              <h5 class="title-icon">
+                Enter Your Brand Copay
+                <i class="fa fa-question-circle" (click)="open(brandCopayHelpTwo)"></i>
+              </h5>
+              <!-- Copay Quantity -->
+              <div>
+                <div class="btn-input-btn">
+                  <i class="fa fa-minus" (click)="brandCopayQtyDec()"></i>
+                  <span>$</span>
+                  <input type="number" [(ngModel)]="brandCopayAmount" />
+                  <i class="fa fa-plus" (click)="brandCopayQtyInc()"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End If -->
+          <!-- Remember Choice -->
+          <div id="search-footer" class="checks clearfix">
+            <div class="choice">
+              <input type="checkbox" name="remember_location" id="remember_location" value="on" />
+              <label for="remember_location">Remember My Copay Details</label>
+              <i class="fa fa-question-circle move" (click)="open(rememberCopayHelp)"></i>
+            </div>
+          </div>
+          <!-- Navigation Buttons -->
+          <div class="navigation-btns-grp">
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--outline"
+              routerLink="/step1">
+              <i class="fa fa-chevron-left"></i> Home
+            </a>
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--solid navigation-btns-grp__btn--blink"
+              routerLink="/step3">
+              Continue <i class="fa fa-chevron-right"></i>
+            </a>
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--full navigation-btns-grp__btn--outline"
+              routerLink="/step3">
+              Skip This Step <i class="fa fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-7 map-section">
+          <div id="map" #map></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="saving-finder__footer">
+    <p>&copy; 2018 All Rights Reserved</p>
+    <p>
+      <strong>Help: <a href="tel:18333000103">1-833-300-0103</a></strong>
+    </p>
+  </div>
+</div>
+
+<!-- Modals HTML -->
+<!-- Copay Details Modal -->
+<ng-template #copayDetails let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Copay Details Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        If you have prescription insurance and know how much you pay answer the
+        questions below and we will compare with our prices.
+      </p>
+      <p class="cst-modal__para">
+        If you do not have insurance or do not know how to answer the questions
+        simply select CONTINUE.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!-- Copay Insured Help Modal -->
+<ng-template #insuredHelp let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Are You Insured Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        Do you have prescription insurance and pay a fixed copayment amount for
+        generic and brand medications?
+      </p>
+      <p class="cst-modal__para">
+        If you do not have insurance or do not know how to answer the questions
+        simply select CONTINUE.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!-- Generic Copay Help Modal -->
+<ng-template #genericCopayHelp let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Generic Copay Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        Select the copayment amount you pay for generic medications.
+      </p>
+      <p class="cst-modal__para">
+        If the amount is not listed select OTHER and enter the amount.
+      </p>
+      <p class="cst-modal__para">
+        If the amount varies each time select VARIES.
+      </p>
+      <p class="cst-modal__para">
+        If you are not sure about your generic copayment select NOT SURE.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!-- Brand Copay Help Modal -->
+<ng-template #brandCopayHelp let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Brand Copay Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        If you pay the same copayment amount for all brand name medications
+        select YES.
+      </p>
+      <p class="cst-modal__para">
+        If you do not know your brand copayment amount or if it varies each time
+        select NO.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!-- Brand Copay Help Two Modal -->
+<ng-template #brandCopayHelpTwo let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Brand Copay Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        Enter your copayment for brand name medications.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!-- Brand Copay Help Two Modal -->
+<ng-template #rememberCopayHelp let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Remember My Copay Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        If this setting is checked your internet browser on this device will
+        store your selections and you will not need to enter them again unless
+        they change.
+      </p>
+      <p class="cst-modal__para">
+        If you do not want the browser to remember your selections simply
+        uncheck this setting.
+      </p>
+    </div>
+  </div>
+</ng-template>

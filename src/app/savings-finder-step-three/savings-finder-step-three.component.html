@@ -1,0 +1,393 @@
+<div class="saving-finder">
+  <!-- Header -->
+  <div class="saving-finder__header saving-finder__header-style2">
+    <img src="assets/img/logo-icon.png" alt="" class="saving-finder__header-logo" routerLink="" />
+    <h3 class="saving-finder__header-title saving-finder__header-style2-title">
+      <span>Current Location: </span>
+      <strong>{{address}} </strong>
+      <a routerLink="/step1" class="saving-finder__header-style2-edit-btn">edit</a>
+    </h3>
+  </div>
+  <!-- Body -->
+  <div class="saving-finder__body step-two">
+    <div class="saving-finder__body-nav">
+      <a routerLink="/step1" class="saving-finder__body-nav-item saving-finder__body-nav-item-complete">
+        <span>1</span>
+        <span>Location</span>
+      </a>
+      <a routerLink="/step2" class="saving-finder__body-nav-item saving-finder__body-nav-item-complete">
+        <span>2</span>
+        <span>Benefits</span>
+      </a>
+      <a routerLink="/step3" class="saving-finder__body-nav-item saving-finder__body-nav-item-current">
+        <span>3</span>
+        <span>Medication</span>
+      </a>
+      <a class="saving-finder__body-nav-item" rel="disabled">
+        <span>4</span>
+        <span>Results</span>
+      </a>
+    </div>
+    <div class="saving-finder__body-content">
+      <div class="row saving-finder__body-content-row">
+        <div class="col-md-5 saving-finder__body-content-left">
+          <!-- Title -->
+          <h3 class="title-icon">
+            Add Medications To Price <i class="fa fa-question-circle" (click)="open(medicationHelp)"></i>
+          </h3>
+          <h3 class="title-icon">
+            Search
+          </h3>
+          <!-- Medication Search -->
+          <div class="medication-search">
+            <input type="text" placeholder="Start typing medication name here..." class="medication-search__input"
+              [(ngModel)]="reqPath" (input)="getDrugsList(reqPath)" />
+            <!-- <i class="fa fa-search medication-search__icon"></i> -->
+            <i class="medication-search__icon" (click)="getDrugsList(reqPath)"></i>
+          </div>
+          <!-- Drugs List -->
+          <div class="drugs-list drugs-list--style2" *ngIf="showDrugListData">
+            <!-- Drugs List -->
+            <div class="drugs-list__item" *ngFor="let drug of drugsList">
+              <div class="drugs-list__item-left">
+                <h5 class="drugs-list__drug-name">{{drug.BN}}</h5>
+                <p class="drugs-list__drug-description">
+                  <span *ngIf="drug.DrugTypes == 'B'">(Brand for {{drug.AN}})</span>
+                  <span *ngIf="drug.DrugTypes == 'G'">(Generic for {{drug.AN}})</span>
+                </p>
+              </div>
+              <div class="drugs-list__item-right">
+                <button class="drugs-list__drug-type" (click)="getDrugDetails(drug.GPI10s[0])">
+                  <span *ngIf="drug.DrugTypes == 'B'">Brand</span>
+                  <span *ngIf="drug.DrugTypes == 'G'">Generic</span>
+                </button>
+              </div>
+            </div>
+            <!-- Drugs Detail -->
+            <!-- <div class="drugs-list__item" *ngFor="let drug of drugData">
+              <div class="drugs-list__item-left">
+                <h5 class="drugs-list__drug-name">{{drug.BN}} {{drug.DosageForm}}</h5>
+                <p class="drugs-list__drug-description drugs-list__drug-description--predictions">
+                  <span class="drugs-list__drug-span-btn">{{drug.PackageSize}} {{drug.PackageUnit}}
+                    {{drug.PackageDesc}}
+                  </span>
+                  <span> <i class="fa fa-check-square"></i> Confirm </span>
+                </p>
+              </div>
+              <div class="drugs-list__item-right">
+                <button class="drugs-list__drug-type">
+                  <span *ngIf="drug.DrugType == 'B'">Brand</span>
+                  <span *ngIf="drug.DrugType == 'G'">Generic</span>
+                </button>
+              </div>
+            </div> -->
+          </div>
+          <!--  -->
+
+          <!-- selcted medication content box -->
+          <div class="selected-medication" *ngIf="medicationInfoBox">
+            <i class="fa fa-times-circle selected-medication__close" (click)="closeMedicationInfoBox()"></i>
+            <h4 class="selected-medication__title">
+              <strong>
+                We have selected the most common form and strength.
+              </strong>
+              If your medication is different select to show other options.
+            </h4>
+            <!-- Medication Info -->
+            <div class="selected-medication__info">
+              <div class="selected-medication__info-top">
+                <div class="selected-medication__info-left">
+                  <i class="medication-icon"></i>
+                </div>
+                <div class="selected-medication__info-right">
+                  <h2 class="selected-medication__info-title">{{drugDetail.BN}}</h2>
+                  <h3 class="selected-medication__info-sub-title text-capitalize">{{ drugDetail.Strength}}
+                    {{drugDetail.DosageForm}}
+                  </h3>
+                  <p class="selected-medication__info-description text-capitalize">(<span
+                      *ngIf="drugDetail.DrugType == 'B'">Brand
+                      for </span><span *ngIf="drugDetail.DrugType == 'G'">Generic for </span>{{drugDetail.AN}})</p>
+                  <p class="selected-medication__info-description text-capitalize">{{drugDetail.LN}}</p>
+                  <button class="selected-medication__info-btn" (click)="open(otherOptions)">Show other options</button>
+                </div>
+              </div>
+              <div class="selected-medication__info-bottom">
+                <h3 class="selected-medication__info-sub-title text-capitalize">Quantity
+                  <span>({{drugDetail.DosageForm}})</span></h3>
+                <div class="selected-medication__info-bottom-bottom">
+                  <div class="selected-medication__info-bottom-left">
+                    <!-- Radio Amount Group  -->
+                    <div class="cst-radio-btns-grp cst-radio-btns-grp--medication">
+                      <div *ngFor="let qty of qtyArray;let i = index" class="cst-radio-btns-grp__box">
+                        <input type="radio" name="medication-qty" id="medication-qty-{{i}}" [checked]="i==0" />
+                        <label for="medication-qty-{{i}}" (click)="qtySet(qty.qty)">{{qty.qty}}</label>
+                      </div>
+                      <!-- <input type="radio" name="medication-qty" id="two" />
+                      <label for="two">2</label> -->
+                    </div>
+                  </div>
+                  <div class="selected-medication__info-bottom-right">
+                    <!-- Quantity -->
+                    <div>
+                      <div class="btn-input-btn">
+                        <i class="fa fa-minus" (click)="qtyDec()"></i>
+                        <!-- <span>$</span> -->
+                        <input type="number" [(ngModel)]="qty" />
+                        <i class="fa fa-plus" (click)="qtyInc()"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Save to Medication List Button -->
+                <div class="navigation-btns-grp">
+                  <button
+                    class="navigation-btns-grp__btn navigation-btns-grp__btn--full navigation-btns-grp__btn--solid navigation-btns-grp__btn--blink d-flex justify-content-between align-items-center"
+                    (click)="medicationListData(drugDetail)">
+                    <span>SAVE TO MEDICATION LIST</span> <i class="fa fa-plus-circle"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- edit medication content box -->
+          <div class="selected-medication" *ngIf="editmedicationInfoBox">
+            <i class="fa fa-times-circle selected-medication__close" (click)="closeeditMedicationInfoBox()"></i>
+            <h4 class="selected-medication__title">
+              <strong>
+                We have selected the most common form and strength.
+              </strong>
+              If your medication is different select to show other options.
+            </h4>
+            <!-- Medication Info -->
+            <div class="selected-medication__info">
+              <div class="selected-medication__info-top">
+                <div class="selected-medication__info-left">
+                  <i class="medication-icon"></i>
+                </div>
+                <div class="selected-medication__info-right">
+                  <h2 class="selected-medication__info-title">{{editMedicationdata.BN}}</h2>
+                  <h3 class="selected-medication__info-sub-title text-capitalize">{{ editMedicationdata.Strength}}
+                    {{editMedicationdata.DosageForm}}
+                  </h3>
+                  <p class="selected-medication__info-description text-capitalize">(<span
+                      *ngIf="editMedicationdata.DrugType == 'B'">Brand
+                      For </span><span *ngIf="editMedicationdata.DrugType == 'G'">Generic For
+                    </span>{{editMedicationdata.AN}})</p>
+                  <p class="selected-medication__info-description text-capitalize">{{editMedicationdata.LN}}</p>
+                  <button class="selected-medication__info-btn" (click)="open(otherOptions)">Show other options</button>
+                </div>
+              </div>
+              <div class="selected-medication__info-bottom">
+                <h3 class="selected-medication__info-sub-title text-capitalize">Quantity
+                  <span>({{editMedicationdata.DosageForm}})</span></h3>
+                <div class="selected-medication__info-bottom-bottom">
+                  <div class="selected-medication__info-bottom-left">
+                    <!-- Radio Amount Group  -->
+                    <div class="cst-radio-btns-grp cst-radio-btns-grp--medication">
+                      <div *ngFor="let qty of qtyArray;let i = index" class="cst-radio-btns-grp__box">
+                        <input type="radio" name="medication-qty" id="medication-qty-{{i}}"
+                          [checked]="editMedicationdata.QtyPrediction==qty.qty" />
+                        <label for="medication-qty-{{i}}" (click)="qtySet(qty.qty)">{{qty.qty}}</label>
+                      </div>
+                      <!-- <input type="radio" name="medication-qty" id="two" />
+                          <label for="two">2</label> -->
+                    </div>
+                  </div>
+                  <div class="selected-medication__info-bottom-right">
+                    <!-- Quantity -->
+                    <div>
+                      <div class="btn-input-btn">
+                        <i class="fa fa-minus" (click)="qtyDec()"></i>
+                        <!-- <span>$</span> -->
+                        <input type="number" [(ngModel)]="qty" />
+                        <i class="fa fa-plus" (click)="qtyInc()"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Save to Medication List Button -->
+                <div class="navigation-btns-grp">
+                  <button
+                    class="navigation-btns-grp__btn navigation-btns-grp__btn--full navigation-btns-grp__btn--solid navigation-btns-grp__btn--blink d-flex justify-content-between align-items-center"
+                    (click)="updatemedicationListData(drugDetail)">
+                    <span>SAVE TO MEDICATION LIST</span> <i class="fa fa-plus-circle"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Medication List -->
+          <div *ngIf="medicationListBox">
+            <h3 class="title-icon my-4">
+              Medication List (<span *ngIf="medicationListDetail.length != 0">{{medicationListDetail.length}}</span>
+              <span *ngIf="medicationListDetail.length == 0">0</span>)
+              <i class="fa fa-question-circle" (click)="open(medicationList)"></i>
+            </h3>
+            <!-- selcted medication content box -->
+            <div class="selected-medication selected-medication--list"
+              *ngFor="let list of medicationListDetail;let i=index">
+              <div class=selected-medication__icons>
+                <i class="fa fa-pencil-alt" (click)="editMedication(list,i)"></i>
+                <i class="fa fa-times-circle" (click)="removeMedication(list)"></i>
+              </div>
+              <!-- Medication Info -->
+              <div class="selected-medication__info">
+                <div class="selected-medication__info-top">
+                  <div class="selected-medication__info-left">
+                    <i class="medication-icon"></i>
+                  </div>
+                  <div class="selected-medication__info-right">
+                    <h3 class="selected-medication__info-sub-title text-capitalize">{{list.BN}}
+                      <span>
+                        <small class="font-weight-bold">{{list.Strength}} {{list.DosageForm}}</small>
+                      </span>
+                    </h3>
+                    <p class="selected-medication__info-description text-capitalize">(<span
+                        *ngIf="list.DrugType == 'B'">Brand</span>
+                      <span *ngIf="list.DrugType == 'G'">Generic</span> for {{list.AN}})
+                    </p>
+                    <p class="selected-medication__info-description text-capitalize">{{list.LN}}</p>
+                    <label class="selected-medication__info-medication-type">
+                      <span *ngIf="list.DrugType == 'B'">Brand</span>
+                      <span *ngIf="list.DrugType == 'G'">Generic</span>
+                      <span>Quantity: {{list.QtyPrediction}}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Remember Choice -->
+          <div id="search-footer" class="checks clearfix">
+            <div class="choice">
+              <input type="checkbox" name="remember_medication" id="remember_medication" value="on" /><label
+                for="remember_location">Remember My Medication</label>
+            </div>
+          </div>
+          <!-- Navigation Buttons -->
+          <div class="navigation-btns-grp">
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--outline"
+              routerLink="/step2">
+              <i class="fa fa-chevron-left"></i>
+              Benifits
+            </a>
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--solid"
+              routerLink="/step3" rel="disabled" *ngIf="medicationListDetail.length == 0">
+              Continue <i class="fa fa-chevron-right"></i>
+            </a>
+            <a class="navigation-btns-grp__btn navigation-btns-grp__btn--half navigation-btns-grp__btn--solid"
+              routerLink="/step4" *ngIf="medicationListDetail.length != 0">
+              Continue <i class="fa fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-7 map-section">
+          <div id="map" #map></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="saving-finder__footer">
+    <p>&copy; 2018 All Rights Reserved</p>
+    <p>
+      <strong>Help: <a href="tel:18333000103">1-833-300-0103</a></strong>
+    </p>
+  </div>
+</div>
+
+<!-- Modals HTML -->
+<!-- Medical Help Modal -->
+<ng-template #medicationHelp let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Add Medication Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        Type the name of a medication and possible matches will begin to display
+        in a list below. Select the medication from the list by clicking or
+        tapping on it.
+      </p>
+      <p class="cst-modal__para">
+        We will select the most common form and strength automatically. Check
+        this carefully and if your medication is different be sure to select
+        SHOW OTHER OPTIONS to change the medication.
+      </p>
+      <p class="cst-modal__para">
+        Select from the common quantities listed or type a different quantity.
+      </p>
+      <p class="cst-modal__para">
+        Make sure you select SAVE TO MEDICATION LIST for each medication. After
+        you have added all medications to your list select CONTINUE.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!-- Medical List Modal -->
+<ng-template #medicationList let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        Medication List Help
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body">
+      <p class="cst-modal__para">
+        Add each medication to this list to search prices. You must add at least one medication and select CONTINUE.
+      </p>
+      <p class="cst-modal__para">
+        To edit a medication in the list select the pencil icon next to the medication. To remove a medication from the
+        list select the X icon next to the medication.
+      </p>
+      <p class="cst-modal__para">
+        If you would like this device to remember your medication list select Remember My Medication.
+      </p>
+    </div>
+  </div>
+</ng-template>
+<!-- All Seclections -->
+<ng-template #otherOptions let-modal>
+  <div class="cst-modal">
+    <div class="modal-header cst-modal__header">
+      <h3 class="modal-title cst-modal__title" id="modal-basic-title">
+        All Selections
+      </h3>
+      <button type="button" class="close cst-modal__close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <!-- <span>&times;</span> -->
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body cst-modal__body cst-modal__body--full-height">
+      <div class="drug-options" *ngFor="let drug of drugData.predictions;let i = index" (click)="setDrugDetail(i)">
+        <div class="drug-options__left">
+          <i class="drug-options__icon"></i>
+        </div>
+        <div class="drug-options__right">
+          <h3 class="drug-options__title">{{drug.BN}}</h3>
+          <p class="drug-options__description">
+            (<span *ngIf="drugDetail.DrugType == 'B'">Brand For </span>
+            <span *ngIf="drugDetail.DrugType == 'G'">Generic For </span>{{drug.AN}})</p>
+          <p class="drug-options__description">{{drug.LN}}</p>
+          <button class="drug-options__button">
+            <span *ngIf="drug.DrugType == 'B'">Brand</span>
+            <span *ngIf="drug.DrugType == 'G'">Generic</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

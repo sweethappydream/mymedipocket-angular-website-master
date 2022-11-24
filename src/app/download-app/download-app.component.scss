@@ -1,0 +1,13 @@
+.mat-dialog-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.mat-dialog-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    place-items: center;
+    row-gap: 20px;
+    padding-bottom: 30px;
+}

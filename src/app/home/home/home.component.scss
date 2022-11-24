@@ -1,0 +1,292 @@
+.download-app {
+  display: block;
+  margin: 20px auto;
+}
+
+img[data-src="*"] {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+header {
+  background: url('../../../assets/background.jpg');
+  background-position: 10% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 10%;
+  margin-top: 63.75px !important;
+
+  h3 {
+    font-weight: 600;
+    padding-bottom: 20px;
+  }
+
+  .search-bar {
+
+    display: grid;
+    max-width: 500px;
+    margin: 0 auto;
+    align-items: stretch;
+    row-gap: 10px;
+    margin-top: 50px;
+
+    input {
+      border: 0;
+      border-radius: 4px;
+      padding: 10;
+      padding: 5px 10px;
+    }
+
+    input::placeholder {
+      font-size: 16px;
+    }
+
+    input::placeholder-shown {
+      font-size: 16px;
+    }
+  }
+}
+
+h2 { padding: 20px 0; }
+
+%green-border {
+  border: 1px solid #00d1b2;;
+}
+
+%home-card {
+  @extend %green-border;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+%two-cols {
+  display: grid;
+  grid-template-columns: 40vw 40vw;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+
+.p-heading {
+  font-weight: 500;
+  text-decoration: underline;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+#RXS {
+  padding: 20px;
+  text-align: center;
+
+  .savings-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    place-content: center;
+    justify-items: center;
+    row-gap: 20px;
+    column-gap: 20px;
+  }
+
+  .saving-card {
+    @extend %home-card;
+    margin: 0;
+    text-align: center;
+
+    p { text-align: left; }
+  }
+}
+
+.many-solutions {
+  padding: 20px;
+  background: #d6fcf6;
+
+  .solutions-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    place-content: center;
+    justify-items: center;
+    row-gap: 20px;
+    column-gap: 20px;
+
+    .solutions-card {
+      @extend %home-card;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+
+      img { border-top-right-radius: 8px; border-top-left-radius: 8px; } 
+      p, ul { text-align: left; padding-left: 40px; }
+      ul { padding-top: 10px }
+    }
+  }
+  
+}
+
+.card-partners {
+  padding: 40px 20px;
+  text-align: center;
+
+  .partners {
+    padding: 0 5vw;
+
+    img { max-width: 100px; margin: 0 auto; }
+  }
+}
+
+.prescriptions {
+  padding: 20px;
+  text-align: center;
+
+  .description {
+    text-align: left;
+  }
+
+  td:first-child {
+    background: #ddd;
+    font-weight: 500;
+  }
+  
+}
+
+.members-savings {
+  .video-box {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    background-image: url('https://img.youtube.com/vi/m82IB2x2Hmo/maxresdefault.jpg');
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+  }
+
+  .video-box:before {
+    content: "";
+    width: 75px;
+    height: 75px;
+    background: #cf242a;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    will-change: transform;
+    border: 2px #fff solid;
+    transition: all 500ms cubic-bezier(0.75, -1, 0.35, 2);
+    transition-timing-function: cubic-bezier(0.75, -1, 0.35, 2);
+  }
+
+  .video-box:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 16px 0 16px 30px;
+    border-color: transparent transparent transparent #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-40%) translateY(-50%);
+    transform: translateX(-40%) translateY(-50%);
+  }
+}
+
+.members-savings, .same-day-rx {
+  background: #d6fcf6;
+}
+
+.members-savings, .same-day-rx, .testimonies {
+  padding: 20px;
+
+  .slide {
+    padding: 20px;
+    margin: 0 10px;
+    border: 1px solid #00d1b2;
+    border-radius: 8px;
+  }
+}
+
+.footer {
+  padding: 20px;
+  background: #00d1b2a1;
+  text-align: center;  
+
+  .screenshot-img {
+    width: 55vw;
+    margin: 10px auto;
+  }
+
+  .description {
+    .white-text-logo {
+      width: 30vw;
+      max-width: 100px;
+      margin: 0 auto;
+    }
+
+    .app-logos a img {
+      max-width: 200px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search-bar {
+    column-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    input { margin-bottom: 0 !important; }
+  }
+
+  #RXS {
+    .saving-card {
+      margin: 20px 10px;
+    }
+  }
+
+  .prescriptions {
+    .description {
+      display: grid;
+      grid-template-columns: 40vw 40vw;
+      justify-content: space-evenly;
+      padding-top: 20px;
+    }
+  }
+
+  .members-savings {
+    .vid-and-points {
+      display: grid;
+      grid-template-columns: 40vw 40vw;
+      justify-content: space-evenly;
+      padding-top: 20px;
+    }
+  }
+
+  .same-day-rx {
+    .details {
+      display: grid;
+      grid-template-columns: 40vw 40vw;
+      justify-content: space-evenly;
+      padding-top: 20px;
+    }
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: 40vw 40vw;
+    justify-content: space-evenly;
+    padding-top: 40px;
+    place-items: center;
+
+    .screenshot-img {
+      max-width: 300px;
+      margin: 10px auto;
+    }
+  }
+}

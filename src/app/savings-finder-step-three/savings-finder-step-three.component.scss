@@ -1,0 +1,45 @@
+@media(max-width:767px) {
+    .selected-medication__info-right {
+      width: 100% !important;
+    }
+  }
+  
+  @media(max-width:575px) {
+    h3 {
+      font-size: 18px;
+    }
+  }
+  
+  @media only screen and (min-width: 320px) and (max-width: 991px) {
+    .selected-medication__info-left {
+      display: none !important;
+    }
+  
+    .saving-finder__body .selected-medication__info-sub-title {
+      font-size: 1rem;
+    }
+  }
+  
+  @media only screen and (min-width:320px) and (max-width:1024px) {
+  
+    .saving-finder__body .cst-radio-btns-grp--amount label,
+    .saving-finder__body .cst-radio-btns-grp--medication label {
+      font-size: 1rem;
+    }
+  
+  }
+  
+  p.selected-medication__info-description {
+    font-size: 12px;
+  }
+  @media(max-width:767px){
+    .saving-finder__body .selected-medication__info-medication-type span{
+      font-size: 1.0em;
+    }
+    .saving-finder__body .selected-medication__info-top {
+      margin-bottom: 0;
+    }
+    .saving-finder__body .selected-medication__info {
+      margin-top: 0;
+    }
+  }

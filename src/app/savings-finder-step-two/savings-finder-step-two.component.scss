@@ -1,0 +1,43 @@
+
+.saving-finder__body .cst-radio-btns-grp--right{
+    text-align: left;
+}
+
+@media only screen and (min-width: 756px){
+.saving-finder__body .cst-radio-btns-grp--right {
+    text-align: right;
+    clear: none;
+  }
+}
+.move{
+    position: relative !important;
+    top: 4px !important;
+}
+@media only screen and (min-width:310px) and (max-width:767px){
+.move{
+    position: relative !important;
+    top: 6px !important;
+  }
+}
+@media only screen and (min-width:320px) and (max-width:1124px){
+  .saving-finder__body .cst-radio-btns-grp input[type=radio] + label{
+  font-size: 1.1rem;
+  }
+}
+@media only screen and (min-width:320px) and (max-width:367px){
+.saving-finder__body .cst-radio-btns-grp--amount label {
+      width: calc((100% - 45px) / 4);
+      margin-bottom: 5px;
+  }
+}
+@media only screen and (min-width:767px) and (max-width:1024px){
+  .saving-finder__body .cst-radio-btns-grp--amount label {
+        width: calc((100% - 45px) / 4);
+        margin-bottom: 5px;
+    }
+  }
+  @media only screen and (min-width:320px) and (max-width:1024px){
+  .saving-finder__body .cst-radio-btns-grp label:not(:first-of-type){
+     margin: 0 3px 2px 3px;
+  }
+}

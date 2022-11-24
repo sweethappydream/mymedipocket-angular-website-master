@@ -1,0 +1,262 @@
+<header>
+  <h3 style = 'color: white;'>YOUR HEALTH IN YOUR POCKETS</h3>
+  <h3 style = 'color: white; text-decoration: underline;'>Save up to <span class = 'green'>80%</span> on Prescriptions</h3>
+
+  <div class="search-bar">
+    <input type="text" id = 'med-search' placeholder="Search for Medication">
+    <label style = 'margin: 0; font-weight: 500;' class = 'btn btn-danger' routerLink="/find-the" for="med-search">Find Lowest Price</label>
+    <!-- <label for="med-search">
+      Search for Medication
+      <input id = 'med-search' #search type="text" placeholder="Search for Medication">
+    </label>
+    <button routerLink="/find-the" class = 'btn btn-danger' style = 'font-weight: 600;'>Find Lowest Price</button> -->
+  </div>
+</header>
+
+<section id="RXS" class = 'page-padding'>
+  <h2>Rx Savings: Simple as 1-2-3</h2>
+
+  <div class="savings-cards">
+    <div class="saving-card">
+      <img data-src="assets/map-and-pharmacy.png" alt="Pharmacy and Phone showing map">
+      <p class = 'p-heading'>Compare Prices</p>
+      <p>Find lowest price nearby from among 75,000 pharmacies nationwide</p>
+    </div>
+
+    <div class="saving-card">
+      <img data-src="assets/save-80.jpg" alt="Card showing savings info">
+      <p class = 'p-heading'>Save up to 80% on Rx</p>
+      <p>Show your FREE MediPocket Discount card from phone at pharmacy</p>
+    </div>
+
+    <div class="saving-card">
+      <img data-src="assets/delivery-guy.jpg" alt="Delivery man holding package">
+      <p class = 'p-heading'>Same Day Rx Delivery</p>
+      <p>Your choice of pharmacy. Available in select cities</p>
+    </div>
+  </div>
+
+  <button class = 'btn btn-success btn-lg download-app' (click) = 'triggerAppModal()'>Download the App!</button>
+</section>
+
+<section class="many-solutions">
+  <h2>MediPocket: Many Solutions in One App</h2>
+
+  <div class="solutions-cards">
+    <div class="solutions-card">
+      <img data-src="assets/save-80.jpg" alt="save up to 80% on Rx">
+      <p class = 'p-heading'>Pharmacy discount card</p>
+      <ul>
+        <li>Save Up To 80% On Prescriptions</li>
+        <li>Works for People & Pets</li>
+        <li>FREE Rx Discount Card</li>
+        <li>Everyone Eligible—Even with Insurance</li>
+      </ul>
+    </div>
+
+    <div class="solutions-card">
+      <img data-src="assets/delivery-guy.jpg" alt="ON-DEMAND MEDI DELIVERY">
+      <p class = 'p-heading'>Same Day Rx Delivery</p>
+      <ul>
+        <li>Same Day Rx Delivery</li>
+        <li>Your Choice of Pharmacy</li>
+        <li>HIPAA Compliant</li>
+        <li>Real-Time Delivery Tracking</li>
+      </ul>
+    </div>
+
+    <div class="solutions-card">
+      <img data-src="assets/delbg.jpg" alt="ON-DEMAND MEDICAL RECORDS">
+      <p class = 'p-heading'>Same Day Rx Delivery</p>
+      <ul>
+        <li>Virtual Health Companion</li>
+        <li>Store, Manage &amp; Share Up to 5 Personal Health Records</li>
+        <li>Pill, Refill &amp; Appointment Reminders*</li>
+        <li>Personalized Health Notifications</li>
+      </ul>
+    </div>
+
+    <div class="solutions-card">
+      <img data-src="assets/dr_ai.jpeg" alt="ON-DEMAND MEDICAL RECORDS">
+      <p class = 'p-heading'>Dr. AI By Your Side</p>
+      <ul>
+        <li>Data-Driven Symptom Checker</li>
+        <li>2-D Body Images</li>
+        <li>Hyper-Personalized Predictive Analysis</li>
+        <li>Predictive Analysis</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <button class = 'btn btn-success btn-lg download-app' (click) = 'triggerAppModal()'>Download the App!</button>
+
+</section>
+
+<section class="prescriptions">
+  <h2>Save Money on Prescriptions for People and Pets!</h2>
+
+  <div class="description">
+    <div class="desc-text">
+      <h3>MediPocket Rx <span class="text-danger font-weight-bold">Savings Program</span></h3>
+      <p>
+        Our pharmacy savings program gives millions of cardholder’s free access to discounts on thousands of FDA
+        approved prescription medications. We do this by partnering and negotiating savings with 75,000+ pharmacies
+        nationwide and pass savings directly on to our users.
+      </p>
+      <p>
+        Our focus is to continue finding ways to negotiate even deeper discounts with pharmacies, so that all MediPocket
+        users can afford the medications they need!
+      </p>
+    </div>
+
+    <div class="savings-numbers">
+      <h3>Recent Member Savings</h3>
+      <table class="savings table ">
+        <tr>
+          <td>Medication</td>
+          <td>GABAPENTIN 600 MG TABLET</td>
+        </tr>
+        <tr>
+          <td>Count</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>Retail</td>
+          <td>$189.99</td>
+        </tr>
+        <tr>
+          <td>Paid</td>
+          <td>$28.21</td>
+        </tr>
+        <tr>
+          <td>Savings (Dollars)</td>
+          <td>$161.78</td>
+        </tr>
+        <tr>
+          <td>Savings (Percent)</td>
+          <td><span class="font-weight-bold text-danger">80%</span></td>
+        </tr>
+        <tr>
+          <td>Pharmacy</td>
+          <td><span class="font-weight-bold">
+            <img style = 'height: 25px' alt = 'RiteAid Pharmacy Logo' src="assets/logos/riteaid2.svg">
+          </span></td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td><span class="font-weight-bold">SAIN DIEGO, CA</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <button class = 'btn btn-success btn-lg download-app' (click) = 'triggerAppModal()'>Download the App!</button>
+
+</section>
+
+<section class="members-savings">
+  <h2> Everyone is Eligible - Even With Insurance </h2>
+  <div class="vid-and-points">
+    <div class="video-box" (click) = 'goToVideo()'></div>
+
+    <div class="points">
+      <p class = 'p-heading'>Everyone is Eligible</p>
+      <ul>
+        <li> MediPocket can be used by <b>everyone</b> in your family, <b>pets</b> included.</li>
+        <li> You can <b>save money</b> with MediPocket even if you have medical insurance
+          with prescription benefits.
+        </li>
+        <li> MediPocket is <b>FREE.</b></li>
+        <li><b>No enrollment</b> required. </li>
+        <li><b> No personal information </b> required.</li>
+        <li> Works at Over 75,000 pharmacies in the <b>U.S., Hawaii</b> and <b>Puerto Rico</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <button class = 'btn btn-success btn-lg download-app' (click) = 'triggerAppModal()'>Download the App!</button>
+   
+</section>
+
+<section class = 'card-partners'>
+  <h2>MediPocket Savings Go with You Wherever You Go!</h2>
+  <p> Our Discount Card is Accepted at Over 75,000 Pharmacies in the U.S. Hawaii and Puerto Rico!</p>
+
+  <div class="partners">
+    <div class="slide"><img src="assets/logos/Img-p-1.png" alt="Albertsons"></div>
+    <div class="slide"><img src="assets/logos/Img-p-2.png" alt="A&P"></div>
+    <div class="slide"><img src="assets/logos/Img-p-3.png" alt="Duanereade"></div>
+    <div class="slide"><img src="assets/logos/Img-p-4.png" alt="RITE ID"></div>
+    <div class="slide"><img src="assets/logos/Img-p-5.png" alt="walgreens"></div>
+    <div class="slide"><img src="assets/logos/Img-p-6.png" alt="Kroger"></div>
+    <div class="slide"><img src="assets/logos/Img-p-7.png" alt="CVS Pharmacy"></div>
+    <div class="slide"><img src="assets/logos/Img-p-8.png" alt="Kmart Pharmacy"></div>
+    <div class="slide"><img src="assets/logos/Img-p-9.png" alt="Target"></div>
+    <div class="slide"><img src="assets/logos/Img-p-10.png" alt="Winn Dixie Pharmacy"></div>
+    <div class="slide"><img src="assets/logos/Img-p-11.png" alt="VONS"></div>
+  </div>
+</section>
+
+<section class="same-day-rx">
+  <h2>Same Day Prescription Delivery</h2>
+
+  <div class="details">
+    <div class="points">
+      <p class = 'p-heading'>Same Day Prescription Delivery</p>
+      <ul>
+        <li>Photo ID verification</li>
+        <li>Security code required at pharmacy and at delivery</li>
+        <li>Signature required at delivery for pharmacy records</li>
+        <li>Real-time delivery tracking</li>
+        <li>Delivery available 7 days a week, 362 days a year</li>
+        <li>Delivery specialists are HIPAA Compliance Certified</li>
+      </ul>
+    </div>
+
+    <iframe 
+      title = 'MediPocket Youtube Video'
+      allowfullscreen  
+      frameborder="0"
+      width="100%"
+      height="270"
+      data-src="https://www.youtube.com/embed/ErrrwS51U6Q"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
+    </iframe>
+  </div>
+
+  <button class = 'btn btn-success btn-lg download-app' (click) = 'triggerAppModal()'>Download the App!</button>
+
+</section>
+
+<section class="testimonies">
+  <h2>User Testimonials</h2>
+  <section class="testimonials slider">
+    <div *ngFor="let slide of slides" class="slide">
+      <p class = 'p-heading'>{{slide.name}}</p>
+      <ngx-stars style = 'margin-top: 10px;' [size]="1" [initialStars]="'5'" [color]="'#ffd300'" [readonly]="true"></ngx-stars>
+      <p style = 'margin-top: 10px'>{{slide.text}}</p>
+
+    </div>
+  </section>
+</section>
+
+<section class="footer">
+  <div class="description">
+    <h3>Your savings are only a touch away!</h3>
+    <img class = 'white-text-logo' data-src="assets/logo_white_text.png" alt="Medipocket">
+    <p style = 'color: black'>We've designed the FREE MediPocket app to provide you with great savings on the go.</p>
+
+    <div class="app-logos">
+      <a href="https://play.google.com/store/apps/details?id=com.medipocket.newpatient">
+        <img data-src="assets/android-download.png" alt="Mymedipocket Google Play">
+      </a>
+
+      <a href="https://apps.apple.com/us/app/medipocket-rx-saving-on-demand/id1468232750">
+        <img data-src="assets/download-appstore.png" alt="Mymedipocket AppStore">
+      </a>
+    </div>
+  </div>
+
+  <img class = 'screenshot-img' data-src="assets/app-screenshot.jpg" alt="Screenshot of MediPocket App on Login Screen">
+</section>

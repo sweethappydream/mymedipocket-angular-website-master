@@ -1,0 +1,85 @@
+<!-- BreadCrumb Area Start -->
+
+<!--  help@mymedipocket.com, MediPocketHelp, no-reply@mymedipocket.com, MediUser100K -->
+<!-- 104.198.14.52 -->
+<!-- www.mymedipocket.com.
+CNAME
+medipocket.netlify.com -->
+
+<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCGBfk-20rbv_XrjQ3ioMIgBt56DAAQ62g&libraries=places,visualization" async></script>
+
+<ng-template #field let-control = 'control' let-type = 'type' let-req = 'req' let-placeh = 'placeh'>
+  <input 
+    [type]="type"
+    class="form-control input-field"
+    [formControl] = 'contactForm.get(control)'
+    [id]="control"
+    [name]="control"
+    [placeholder]="placeh" [required]="req" />
+</ng-template>
+
+<header>
+  <h2>Get in Touch with Us</h2>
+</header>
+
+<section class="info">
+  <form [formGroup] = 'contactForm'>
+    <ng-template *ngTemplateOutlet = 'field; context: { control: "name", req: true, type: "text", placeh: "First Name"}'></ng-template>
+    <ng-template *ngTemplateOutlet = 'field; context: { control: "lastname", req: true, type: "text", placeh: "Last Name"}'></ng-template>
+    <ng-template *ngTemplateOutlet = 'field; context: { control: "company_name", req: true, type: "text", placeh: "Company Name"}'></ng-template>
+    <ng-template *ngTemplateOutlet = 'field; context: { control: "email", req: true, type: "email", placeh: "Your Email"}'></ng-template>
+
+    <select type="text" class="form-control input-field" formControlName = 'inquire_type' id="inquire_type" name="inquire_type">
+      <option value = '0' disabled selected> Type of Inquiry </option>
+      <option value="1">Technical Support</option>
+      <option value="2">Pharmacy Delivery Partnership</option>
+      <option value="3">Strategic Partnership </option>
+      <option value="4">Investment Inquiry</option>
+      <option value="5">Speaking Request</option>
+    </select>
+    
+    <ng-template *ngTemplateOutlet = 'field; context: { control: "subject", req: true, type: "text", placeh: "Your Subject"}'></ng-template>
+    <ng-template *ngTemplateOutlet = 'field; context: { control: "phone", req: true, type: "tel", placeh: "Your Phone"}'></ng-template>
+    <ng-template *ngTemplateOutlet = 'field; context: { control: "message", req: true, type: "text", placeh: "Write your Message"}'></ng-template>
+
+    <button class = 'btn btn-success btn-lg' (click) = 'contactMe()'>Submit</button>
+
+  </form>
+
+  <div class="more">
+    <div class="info-card">
+      <h5>Email Us!</h5>
+      <p class = 'bold'>For technical support:</p>
+      <a href="mailto:Support@MyMediPocket.com">Support@MyMediPocket.com</a>
+
+      <p class = 'bold'>For media and speaking inquiries:</p>
+      <a href="mailto:Press@MyMediPocket.com">Press@MyMediPocket.com</a>
+    </div>
+
+    <div class="info-card">
+      <h5>Call Us!</h5>
+      <p>+1 855-919-MEDI</p>
+      <p>+1 818-235-3291</p>
+    </div>
+
+    <div class="info-card">
+      <h5>Find Us!</h5>
+      <p>Los Angeles, California</p>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="map-wrapper">
+  <div id="map">
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe width="100%" height="100%" id="gmap_canvas"
+          src="https://maps.google.com/maps?q=Los%20Angeles%2C%20California.&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>Google Maps Generator by
+        <a href="https://www.embedgooglemap.net">embedgooglemap.net</a>
+      </div>
+    </div>
+  </div>
+</div>
